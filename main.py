@@ -14,17 +14,48 @@ from instaloader.exceptions import TwoFactorAuthRequiredException
 
 global felhasznalonev
 global jelszo
+
+global cel
+cel = []
+global intervallumERTEK
+global kovetokERTEK
+global kovetesERTEK
+global pfpERTEK
+global bioERTEK
+global bejegyzesekERTEK
+global sztorikERTEK
+global kiemeltekERTEK
+global jelolesekERTEK
+global bejegyzesekHozzaszolasokERTEK
+global jelolesekHozzaszolasokERTEK
+global elozoERTEK
+
 insta = instaloader.Instaloader()
 
 with open("config.txt", "r") as file:
     valaszok = [line.split('=')[-1].strip() for line in file.readlines() if '=' in line]
     felhasznalonev = valaszok[0]
     jelszo = valaszok[1]
+    cel.append(valaszok[2])
+    intervallumertek = valaszok[3]
+    kovetokERTEK = valaszok[4]
+    kovetesERTEK = valaszok[5]
+    pfpERTEK = valaszok[6]
+    bioERTEK =valaszok[7]
+    bejegyzesekERTEK = valaszok[8]
+    sztorikERTEK = valaszok[9]
+    kiemeltekERTEK = valaszok[10]
+    jelolesekERTEK = valaszok[11]
+    bejegyzesekHozzaszolasokERTEK = valaszok[12]
+    jelolesekHozzaszolasokERTEK = valaszok[13]
+    elozoERTEK = valaszok[14]
     datum = datetime.now()
     ido = datum.strftime("%H:%M")
     print("\n[{}] >> Belépés\n".format(ido))
+
     try:
-        insta.login(felhasznalonev, jelszo)
+        #insta.login(felhasznalonev, jelszo)
+        print(elozoERTEK)
     except TwoFactorAuthRequiredException:
         kod = input("Kétlépcsős azonosítás szükséges, add meg a kódot: ")
         insta.two_factor_login(kod)
