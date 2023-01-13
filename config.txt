@@ -1,0 +1,19 @@
+felhasznev=
+jelszo=
+cel=
+intervallum=
+kovetok=
+koveti=
+pfp=
+bio=
+bejegyzesek=
+sztorik=
+kiemeltek=
+jelolesek=
+bejegyzesekHozzaszolasok=
+jelolesekHozzaszolasok=
+lastKnownDate=
+"""
+Az intervallumot percben add meg.
+AZ UTOLSÓT NE PISZKÁLD, MERT AZ A LEGUTÓBBI LEKÉRDEZÉS ÉS AZZAL FOGJA ÖSSZEHASONLÍTANI!!
+"""
