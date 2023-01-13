@@ -52,10 +52,20 @@ with open("config.txt", "r") as file:
     datum = datetime.now()
     ido = datum.strftime("%H:%M")
     print("\n[{}] >> Belépés\n".format(ido))
+    print(valaszok)
+
+   # while True:
+    #    if elozoERTEK == "0":
+     #       for i in range(len(cel)):
+      #          print(cel[i])
+       #     break
+
 
     try:
-        #insta.login(felhasznalonev, jelszo)
-        print(elozoERTEK)
-    except TwoFactorAuthRequiredException:
-        kod = input("Kétlépcsős azonosítás szükséges, add meg a kódot: ")
-        insta.two_factor_login(kod)
+        insta.load_session_from_file(felhasznalonev)
+    except FileNotFoundError:
+        try:
+            insta.login(felhasznalonev, jelszo)
+        except TwoFactorAuthRequiredException:
+            kod = input("Kétlépcsős azonosítás szükséges, add meg a kódot: ")
+            insta.two_factor_login(kod)
