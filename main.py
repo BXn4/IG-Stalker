@@ -1,3 +1,4 @@
+
 #----------------------------------------------------------------------------------------#
 #   IIII  GGGGGG       SSSSSS  TTTTTTTT    AAA    LL       KK    KK EEEEEEEE RRRRRRRR    b
 #    II  GG    GG     SS    SS    TT      AA AA   LL       KK   KK  EE       RR     RR   e
@@ -8,9 +9,11 @@
 #   IIII  GGGGGG       SSSSSS     TT    AA     AA LLLLLLLL KK    KK EEEEEEEE RR     RR   =)
 #-----------------------------------------------------------------------------------------#
 
-from datetime import datetime
+from datetime import datetime as dt
 from instaloader import *
 from instaloader.exceptions import TwoFactorAuthRequiredException
+from instascrape import *
+import requests
 
 global felhasznalonev
 global jelszo
@@ -29,6 +32,7 @@ global jelolesekERTEK
 global bejegyzesekHozzaszolasokERTEK
 global jelolesekHozzaszolasokERTEK
 global elozoERTEK
+global jelenlegiSTK
 
 insta = instaloader.Instaloader()
 
@@ -49,23 +53,19 @@ with open("config.txt", "r") as file:
     bejegyzesekHozzaszolasokERTEK = valaszok[12]
     jelolesekHozzaszolasokERTEK = valaszok[13]
     elozoERTEK = valaszok[14]
-    datum = datetime.now()
+    datum = dt.now()
     ido = datum.strftime("%H:%M")
     print("\n[{}] >> Belépés\n".format(ido))
     print(valaszok)
 
-   # while True:
-    #    if elozoERTEK == "0":
-     #       for i in range(len(cel)):
-      #          print(cel[i])
-       #     break
-
-
-    try:
-        insta.load_session_from_file(felhasznalonev)
-    except FileNotFoundError:
-        try:
-            insta.login(felhasznalonev, jelszo)
-        except TwoFactorAuthRequiredException:
-            kod = input("Kétlépcsős azonosítás szükséges, add meg a kódot: ")
-            insta.two_factor_login(kod)
+    for k in cel:
+        fiokok = k.split(',')
+        for fiok in fiokok:
+            fiokscrape = fiok
+            url = f"https://www.instagram.com/{fiokscrape}/"
+            SESSIONID = "NEM"
+            headers = {"user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Mobile Safari/537.36 Edg/87.0.664.57",
+           "cookie": f"sessionid={SESSIONID};"}
+            profile = Profile("https://www.instagram.com/valami")
+            profile.scrape()
+            posts = profile.get_posts()
